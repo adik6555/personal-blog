@@ -1,0 +1,13 @@
+/* This css fixes some issues with semantic ui.
+These issues are mostly related to bad responsivity
+due to some weird margins in semantic ui components */
+
+.ui.grid {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.ui.secondary.menu {
+  margin-left: 0;
+  margin-right: 0;
+}
