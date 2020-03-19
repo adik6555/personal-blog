@@ -1,6 +1,11 @@
 /* This css fixes some issues with semantic ui.
 These issues are mostly related to bad responsivity
 due to some weird margins in semantic ui components */
+@import url("https://fonts.googleapis.com/css?family=Lora&display=swap");
+
+html {
+  font-family: "Lora", serif;
+}
 
 .ui.grid {
   margin-left: 0;
