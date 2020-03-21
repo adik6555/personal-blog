@@ -51,7 +51,7 @@ class MobileNavigation extends React.Component {
   render() {
     const { sidebarOpened } = this.state;
     return (
-      <Responsive maxWidth={749}>
+      <Responsive maxWidth={Responsive.onlyTablet.minWidth}>
         <Sidebar
           animation="overlay"
           onHide={this.handleSidebarHide}
