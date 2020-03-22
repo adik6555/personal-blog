@@ -9,31 +9,48 @@ import {
   Container,
   Responsive,
   Sidebar,
-  SidebarPusher
+  SidebarPusher,
+  Button,
+  Input,
+  Divider
 } from "semantic-ui-react";
 import NoSSR from "react-no-ssr";
 
 class DesktopNavigation extends React.Component {
   render() {
+    const activeItem = this.props.active;
     return (
       <NoSSR>
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-          <Menu pointing>
-            <Container text>
-              <Menu.Item header> Adam Petro </Menu.Item>
+          <Menu pointing secondary>
+            <Menu.Item header>Adam Petro </Menu.Item>
 
-              <Menu.Item href="/page-2/" link name="home">
-                Home
-              </Menu.Item>
+            <Menu.Item active={activeItem === "home"} href="/" link name="home">
+              Home
+            </Menu.Item>
 
-              <Menu.Item href="/page-2/" link name="other">
-                Other
-              </Menu.Item>
+            <Menu.Item
+              active={activeItem === "other"}
+              href="/"
+              link
+              name="other"
+            >
+              Other
+            </Menu.Item>
 
-              <Menu.Item href="/page-2/" link name="about me">
-                About me
+            <Menu.Item
+              active={activeItem === "about me"}
+              href="/"
+              link
+              name="about me"
+            >
+              About me
+            </Menu.Item>
+            {this.props.search && (
+              <Menu.Item position="right">
+                <Input icon="search" placeholder="search" />
               </Menu.Item>
-            </Container>
+            )}
           </Menu>
           {this.props.children}
         </Responsive>
@@ -51,6 +68,7 @@ class MobileNavigation extends React.Component {
 
   render() {
     const { sidebarOpened } = this.state;
+    const activeItem = this.props.active;
     return (
       <Responsive maxWidth={Responsive.onlyTablet.minWidth}>
         <Sidebar
@@ -63,17 +81,37 @@ class MobileNavigation extends React.Component {
         >
           <Menu.Item header> Adam Petro </Menu.Item>
 
-          <Menu.Item href="/page-2/" link name="home">
+          <Menu.Item
+            href="/page-2/"
+            link
+            name="home"
+            active={activeItem === "home"}
+          >
             Home
           </Menu.Item>
 
-          <Menu.Item href="/page-2/" link name="other">
+          <Menu.Item
+            href="/page-2/"
+            link
+            name="other"
+            active={activeItem === "other"}
+          >
             Other
           </Menu.Item>
 
-          <Menu.Item href="/page-2/" link name="about me">
+          <Menu.Item
+            href="/page-2/"
+            link
+            name="about me"
+            active={activeItem === "about me"}
+          >
             About me
           </Menu.Item>
+          {this.props.search && (
+            <Menu.Item position="bottom">
+              <Input icon="search" placeholder="search" />
+            </Menu.Item>
+          )}
         </Sidebar>
 
         <SidebarPusher dimmed={sidebarOpened}>
@@ -94,8 +132,12 @@ class Layout extends React.Component {
   render() {
     return (
       <div style={{ maxWidth: "100%" }}>
-        <MobileNavigation>{this.props.children}</MobileNavigation>
-        <DesktopNavigation>{this.props.children}</DesktopNavigation>
+        <MobileNavigation {...this.props}>
+          {this.props.children}
+        </MobileNavigation>
+        <DesktopNavigation {...this.props}>
+          {this.props.children}
+        </DesktopNavigation>
       </div>
     );
   }

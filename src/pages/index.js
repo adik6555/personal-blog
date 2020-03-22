@@ -6,7 +6,7 @@ import "./index.css";
 
 export default function IndexPage({ data }) {
   return (
-    <Layout>
+    <Layout active="home" search>
       {data.allMarkdownRemark.edges.map(({ node }) => (
         <PostPreview
           title={node.frontmatter.title}
