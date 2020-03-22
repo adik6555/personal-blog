@@ -17,7 +17,8 @@ import {
 } from "react-share";
 import "./post.css";
 
-export default function Post({ data }) {
+export default function Post({ data, location }) {
+  const url = location.href ? location.href : "";
   const post = data.markdownRemark;
   return (
     <Layout>
@@ -32,7 +33,7 @@ export default function Post({ data }) {
             <Menu vertical style={{ width: "auto" }}>
               <Menu.Item style={{ padding: "0" }}>
                 <TwitterShareButton
-                  url={window.location.href}
+                  url={url}
                   style={{ padding: "13px", width: "100%" }}
                 >
                   <Icon size="large" style={{ margin: "0" }} name="twitter" />
@@ -40,7 +41,7 @@ export default function Post({ data }) {
               </Menu.Item>
               <Menu.Item style={{ padding: "0" }}>
                 <FacebookShareButton
-                  url={window.location.href}
+                  url={url}
                   style={{ padding: "13px", width: "100%" }}
                 >
                   <Icon size="large" style={{ margin: "0" }} name="facebook" />
@@ -48,7 +49,7 @@ export default function Post({ data }) {
               </Menu.Item>
               <Menu.Item style={{ padding: "0" }}>
                 <LinkedinShareButton
-                  url={window.location.href}
+                  url={url}
                   style={{ padding: "13px", width: "100%" }}
                 >
                   <Icon size="large" style={{ margin: "0" }} name="linkedin" />
@@ -67,6 +68,10 @@ export const PostQuery = graphql`
   query PostQuery($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
+      fileAbsolutePath
+      fields {
+        slug
+      }
       frontmatter {
         title
         description
