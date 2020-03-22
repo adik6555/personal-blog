@@ -76,7 +76,12 @@ export default function Post({ data, location }) {
             </Menu>
           </div>
           <div>{renderAst(post.htmlAst)}</div>
-          <Commento id={url} />
+          <Segment style={{ marginTop: "2em" }}>
+            <H3>Join the discussion</H3>
+            <div style={{ marginTop: "2em" }}>
+              <Commento id={url} />
+            </div>
+          </Segment>
         </Grid.Column>
       </Grid>
     </Layout>
