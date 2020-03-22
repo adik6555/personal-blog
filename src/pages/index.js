@@ -6,17 +6,20 @@ import "./index.css";
 
 export default function IndexPage({ data }) {
   return (
-    <Layout>
-      {data.allMarkdownRemark.edges.map(({ node }) => (
-        <PostPreview
-          title={node.frontmatter.title}
-          date={node.frontmatter.date}
-          description={node.frontmatter.description}
-          link={node.fields.slug}
-          image={node.frontmatter.thumbnail.childImageSharp.fluid}
-        />
-      ))}
-    </Layout>
+    <div>
+      hey hey hey
+      <Layout>
+        {data.allMarkdownRemark.edges.map(({ node }) => (
+          <PostPreview
+            title={node.frontmatter.title}
+            date={node.frontmatter.date}
+            description={node.frontmatter.description}
+            link={node.fields.slug}
+            image={node.frontmatter.thumbnail.childImageSharp.fluid}
+          />
+        ))}
+      </Layout>
+    </div>
   );
 }
 
