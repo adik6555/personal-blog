@@ -75,12 +75,12 @@ export default function Post({ data, location }) {
             </Menu>
           </div>
           <div>{renderAst(post.htmlAst)}</div>
+          <div id="commento"></div>
+          <script
+            src="https://cdn.commento.io/js/commento.js"
+            data-page-id={url}
+          ></script>
         </Grid.Column>
-        <div id="commento"></div>
-        <script
-          src="https://cdn.commento.io/js/commento.js"
-          data-page-id={url}
-        ></script>
       </Grid>
     </Layout>
   );
