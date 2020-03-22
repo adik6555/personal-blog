@@ -1,0 +1,34 @@
+#share-menu {
+  position: fixed;
+  left: auto;
+}
+@media only screen and (max-width: 2560px) {
+  #share-menu {
+    right: 28%;
+    top: 10%;
+  }
+}
+@media only screen and (max-width: 1920px) {
+  #share-menu {
+    right: 21%;
+    top: 13%;
+  }
+}
+@media only screen and (max-width: 1440px) {
+  #share-menu {
+    right: 21%;
+    top: 13%;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  #share-menu {
+    right: 0;
+    top: 13%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  #share-menu {
+    right: 0;
+    top: 0;
+  }
+}

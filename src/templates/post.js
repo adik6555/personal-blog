@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../components/layout";
 import { graphql } from "gatsby";
-import { useMediaQuery } from "../hooks";
 import {
   Grid,
   Segment,
@@ -16,37 +15,9 @@ import {
   LinkedinShareButton,
   TwitterShareButton
 } from "react-share";
+import "./post.css";
 
 export default function Post({ data }) {
-  const isMobile = useMediaQuery("(min-width: 320px)");
-  const isTablet = useMediaQuery("(min-width: 768px)");
-  const isLaptop = useMediaQuery("(min-width: 1024px)");
-  const isBigLaptop = useMediaQuery("(min-width: 1440px)");
-  const isDesktop = useMediaQuery("(min-width: 1920px)");
-  const isUltraWide = useMediaQuery("(min-width: 2560px)");
-  const shareMenuStyle = {
-    position: "fixed",
-    top: !(isTablet || isLaptop || isBigLaptop || isDesktop || isUltraWide)
-      ? 0
-      : "13%",
-    right: !(isTablet || isLaptop || isBigLaptop || isDesktop || isUltraWide)
-      ? 0
-      : "auto",
-    left: isUltraWide
-      ? "29%"
-      : isDesktop
-      ? "28%"
-      : isBigLaptop
-      ? "20%"
-      : isLaptop
-      ? "18%"
-      : isTablet
-      ? "5%"
-      : isMobile
-      ? "auto"
-      : "auto"
-  };
-
   const post = data.markdownRemark;
   return (
     <Layout>
@@ -57,12 +28,8 @@ export default function Post({ data }) {
             <Header as="h1">{post.frontmatter.title}</Header>
             <Header as="h2"> {post.frontmatter.description}</Header>
           </Segment>
-
-          <div style={shareMenuStyle}>
-            <Menu
-              vertical={isTablet || isLaptop || isDesktop || isUltraWide}
-              style={{ width: "auto" }}
-            >
+          <div id="share-menu">
+            <Menu vertical style={{ width: "auto" }}>
               <Menu.Item style={{ padding: "0" }}>
                 <TwitterShareButton
                   url={window.location.href}
