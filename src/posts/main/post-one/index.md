@@ -1,6 +1,6 @@
 ---
 title: Title of a second post
-description: This second post will talk about lorem ipsum and it's use in modern culture.
+description: ""
 date: 18.3.2020
 thumbnail: "./thumbnail.jpg"
 ---

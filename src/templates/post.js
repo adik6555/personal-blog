@@ -1,14 +1,7 @@
 import React from "react";
 import Layout from "../components/layout";
 import { graphql } from "gatsby";
-import {
-  Grid,
-  Segment,
-  Header,
-  Menu,
-  Icon,
-  Responsive
-} from "semantic-ui-react";
+import { Grid, Segment, Header, Menu, Icon, Label } from "semantic-ui-react";
 import Img from "gatsby-image";
 import {
   FacebookShareButton,
@@ -16,6 +9,20 @@ import {
   TwitterShareButton
 } from "react-share";
 import "./post.css";
+import RehypeReact from "rehype-react";
+import { H1, H2, H3, H4, H5, H6 } from "../components/textComponents";
+
+const renderAst = new RehypeReact({
+  createElement: React.createElement,
+  components: {
+    h1: H2,
+    h2: H3,
+    h3: H4,
+    h4: H5,
+    h5: H6,
+    h6: H6
+  }
+}).Compiler;
 
 export default function Post({ data, location }) {
   const url = location.href ? location.href : "";
@@ -24,10 +31,20 @@ export default function Post({ data, location }) {
     <Layout>
       <Grid textAlign="justified" style={{ justifyContent: "center" }}>
         <Grid.Column widescreen={6} computer={8} tablet={12} mobile={15}>
-          <Segment style={{ textAlign: "right" }}>
+          <Segment attached>
+            <H1>
+              {post.frontmatter.title}
+              <Header.Subheader>
+                {post.frontmatter.description}
+              </Header.Subheader>
+            </H1>
+            <Label>
+              <Icon name="calendar" />
+              {post.frontmatter.date}
+            </Label>
+          </Segment>
+          <Segment attached style={{ marginBottom: "3em" }}>
             <Img fluid={post.frontmatter.thumbnail.childImageSharp.fluid} />
-            <Header as="h1">{post.frontmatter.title}</Header>
-            <Header as="h2"> {post.frontmatter.description}</Header>
           </Segment>
           <div id="share-menu">
             <Menu vertical style={{ width: "auto" }}>
@@ -57,8 +74,13 @@ export default function Post({ data, location }) {
               </Menu.Item>
             </Menu>
           </div>
-          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          <div>{renderAst(post.htmlAst)}</div>
         </Grid.Column>
+        <div id="commento"></div>
+        <script
+          src="https://cdn.commento.io/js/commento.js"
+          data-page-id={url}
+        ></script>
       </Grid>
     </Layout>
   );
@@ -67,7 +89,7 @@ export default function Post({ data, location }) {
 export const PostQuery = graphql`
   query PostQuery($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
+      htmlAst
       fileAbsolutePath
       fields {
         slug
@@ -75,6 +97,7 @@ export const PostQuery = graphql`
       frontmatter {
         title
         description
+        date
         thumbnail {
           childImageSharp {
             fluid(maxWidth: 800) {
