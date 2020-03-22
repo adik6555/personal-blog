@@ -11,12 +11,13 @@ import {
   Sidebar,
   SidebarPusher
 } from "semantic-ui-react";
+import NoSSR from "react-no-ssr";
 
 class DesktopNavigation extends React.Component {
   render() {
     return (
-      <div>
-        <Responsive minWidth={750}>
+      <NoSSR>
+        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
           <Menu pointing>
             <Container text>
               <Menu.Item header> Adam Petro </Menu.Item>
@@ -36,7 +37,7 @@ class DesktopNavigation extends React.Component {
           </Menu>
           {this.props.children}
         </Responsive>
-      </div>
+      </NoSSR>
     );
   }
 }
