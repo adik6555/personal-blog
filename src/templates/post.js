@@ -11,6 +11,7 @@ import {
 import "./post.css";
 import RehypeReact from "rehype-react";
 import { H1, H2, H3, H4, H5, H6 } from "../components/textComponents";
+import Commento from "../components/commento";
 
 const renderAst = new RehypeReact({
   createElement: React.createElement,
@@ -75,11 +76,7 @@ export default function Post({ data, location }) {
             </Menu>
           </div>
           <div>{renderAst(post.htmlAst)}</div>
-          <div id="commento"></div>
-          <script
-            src="https://cdn.commento.io/js/commento.js"
-            data-page-id={url}
-          ></script>
+          <Commento id={url} />
         </Grid.Column>
       </Grid>
     </Layout>
