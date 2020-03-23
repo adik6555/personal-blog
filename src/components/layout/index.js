@@ -21,7 +21,7 @@ class DesktopNavigation extends React.Component {
     const activeItem = this.props.active;
     return (
       <NoSSR>
-        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+        <Responsive minWidth={Responsive.onlyTablet.minWidth + 1}>
           <Menu pointing secondary>
             <Menu.Item header>Adam Petro </Menu.Item>
 
