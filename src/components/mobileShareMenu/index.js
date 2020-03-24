@@ -13,14 +13,14 @@ export default function MobileShareMenu(props) {
   return (
     <div
       style={{
-        width: "51px",
-        textAlign: "center"
+        textAlign: "center",
+        position: "relative",
+        height: "21px"
       }}
       onClick={() => setVisibility(!visibility)}
     >
       <Icon
         style={{ margin: "0", background: "white" }}
-        circular
         size="large"
         name={visibility ? "close" : "share alternate"}
       ></Icon>
@@ -31,7 +31,7 @@ export default function MobileShareMenu(props) {
         animation="slide down"
       >
         {visibility && (
-          <div>
+          <div style={{ position: "absolute", zIndex: "1", right: "-27px" }}>
             <Menu.Item>
               <TwitterShareButton
                 url={url}

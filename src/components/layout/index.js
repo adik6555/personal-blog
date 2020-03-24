@@ -7,17 +7,25 @@ import {
   Input,
   Dimmer,
   Header,
-  Transition
+  Transition,
+  Grid
 } from "semantic-ui-react";
 import NoSSR from "react-no-ssr";
 import { Link } from "gatsby";
+import MobileShareMenu from "../mobileShareMenu";
 
 class DesktopNavigation extends React.Component {
   render() {
     const activeItem = this.props.active;
+    console.log(this.props);
     return (
       <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-        <Menu pointing secondary>
+        <Menu
+          style={{ background: "white", zIndex: "3" }}
+          fixed="top"
+          pointing
+          secondary
+        >
           <Menu.Item header>Adam Petro </Menu.Item>
 
           <Menu.Item active={activeItem === "home"} href="/" link name="home">
@@ -42,7 +50,7 @@ class DesktopNavigation extends React.Component {
             </Menu.Item>
           )}
         </Menu>
-        {this.props.children}
+        <div style={{ marginTop: "65px" }}>{this.props.children}</div>
       </Responsive>
     );
   }
@@ -84,8 +92,15 @@ class MobileNavigation extends React.Component {
           )}
         </Transition.Group>
 
-        <Menu secondary>
-          <Menu.Item onClick={this.handleOpen}>
+        <Menu
+          style={{
+            background: "white",
+            borderBottom: "2px solid rgb(0,0,0,0.2)"
+          }}
+          fixed="top"
+          secondary
+        >
+          <Menu.Item position="left" onClick={this.handleOpen}>
             <Icon size="large" name="bars"></Icon>
           </Menu.Item>
           {this.props.search && (
@@ -93,9 +108,13 @@ class MobileNavigation extends React.Component {
               <Input icon="search" placeholder="search" />
             </Menu.Item>
           )}
+          {this.props.share && (
+            <Menu.Item position="right">
+              <MobileShareMenu />
+            </Menu.Item>
+          )}
         </Menu>
-
-        {this.props.children}
+        <div style={{ marginTop: "75px" }}>{this.props.children}</div>
       </Responsive>
     );
   }
