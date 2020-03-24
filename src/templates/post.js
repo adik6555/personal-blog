@@ -1,12 +1,23 @@
 import React from "react";
 import Layout from "../components/layout";
 import { graphql } from "gatsby";
-import { Grid, Segment, Header, Menu, Icon, Label } from "semantic-ui-react";
+import {
+  Grid,
+  Segment,
+  Header,
+  Menu,
+  Icon,
+  Label,
+  Ref,
+  Sticky,
+  Responsive
+} from "semantic-ui-react";
 import Img from "gatsby-image";
 import {
   FacebookShareButton,
   LinkedinShareButton,
-  TwitterShareButton
+  TwitterShareButton,
+  FacebookMessengerShareButton
 } from "react-share";
 import "./post.css";
 import RehypeReact from "rehype-react";
@@ -28,27 +39,43 @@ const renderAst = new RehypeReact({
 export default function Post({ data, location }) {
   const url = location.href ? location.href : "";
   const post = data.markdownRemark;
+  const contextRef = React.useRef();
   return (
     <Layout>
       <Grid textAlign="justified" style={{ justifyContent: "center" }}>
         <Grid.Column widescreen={6} computer={8} tablet={12} mobile={15}>
-          <Segment attached>
-            <H1>
-              {post.frontmatter.title}
-              <Header.Subheader>
-                {post.frontmatter.description}
-              </Header.Subheader>
-            </H1>
-            <Label>
-              <Icon name="calendar" />
-              {post.frontmatter.date}
-            </Label>
-          </Segment>
-          <Segment attached style={{ marginBottom: "3em" }}>
-            <Img fluid={post.frontmatter.thumbnail.childImageSharp.fluid} />
-          </Segment>
-          <div id="share-menu">
-            <Menu vertical style={{ width: "auto" }}>
+          <Ref innerRef={contextRef}>
+            <div>
+              <Segment attached>
+                <H1>
+                  {post.frontmatter.title}
+                  <Header.Subheader>
+                    {post.frontmatter.description}
+                  </Header.Subheader>
+                </H1>
+                <Label size="large">
+                  <Icon name="calendar" />
+                  {post.frontmatter.date}
+                </Label>
+              </Segment>
+              <Segment attached style={{ marginBottom: "3em" }}>
+                <Img fluid={post.frontmatter.thumbnail.childImageSharp.fluid} />
+              </Segment>
+
+              <div>{renderAst(post.htmlAst)}</div>
+              <Segment style={{ marginTop: "2em" }}>
+                <H3>Join the discussion</H3>
+                <div style={{ marginTop: "2em" }}>
+                  <Commento id={url} />
+                </div>
+              </Segment>
+            </div>
+          </Ref>
+        </Grid.Column>
+
+        <Grid.Column width={1} only="computer tablet">
+          <Sticky offset={30} context={contextRef}>
+            <Menu vertical style={{ width: "51px" }}>
               <Menu.Item style={{ padding: "0" }}>
                 <TwitterShareButton
                   url={url}
@@ -56,6 +83,18 @@ export default function Post({ data, location }) {
                 >
                   <Icon size="large" style={{ margin: "0" }} name="twitter" />
                 </TwitterShareButton>
+              </Menu.Item>
+              <Menu.Item style={{ padding: "0" }}>
+                <FacebookMessengerShareButton
+                  url={url}
+                  style={{ padding: "13px", width: "100%" }}
+                >
+                  <Icon
+                    size="large"
+                    style={{ margin: "0" }}
+                    name="facebook messenger"
+                  />
+                </FacebookMessengerShareButton>
               </Menu.Item>
               <Menu.Item style={{ padding: "0" }}>
                 <FacebookShareButton
@@ -74,14 +113,7 @@ export default function Post({ data, location }) {
                 </LinkedinShareButton>
               </Menu.Item>
             </Menu>
-          </div>
-          <div>{renderAst(post.htmlAst)}</div>
-          <Segment style={{ marginTop: "2em" }}>
-            <H3>Join the discussion</H3>
-            <div style={{ marginTop: "2em" }}>
-              <Commento id={url} />
-            </div>
-          </Segment>
+          </Sticky>
         </Grid.Column>
       </Grid>
     </Layout>
