@@ -7,7 +7,7 @@ import "./index.css";
 export default function IndexPage({ data }) {
   return (
     <Layout active="home" search>
-      {data.allMarkdownRemark.edges.map(({ node }) => (
+      {data.allMdx.edges.map(({ node }) => (
         <PostPreview
           title={node.frontmatter.title}
           date={node.frontmatter.date}
@@ -22,7 +22,7 @@ export default function IndexPage({ data }) {
 
 export const query = graphql`
   query {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
       totalCount
       edges {
         node {

@@ -20,8 +20,24 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
+        extensions: [".mdx", "md"],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {}
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 1.0725rem`
+            }
+          },
+          {
+            resolve: `gatsby-remark-copy-linked-files`
+          }
+        ],
         plugins: [`gatsby-remark-component`]
       }
     },

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "../components/layout";
 import { graphql } from "gatsby";
 import {
@@ -14,25 +14,12 @@ import {
 } from "semantic-ui-react";
 import Img from "gatsby-image";
 import { LinkedinShareButton, TwitterShareButton } from "react-share";
-import RehypeReact from "rehype-react";
-import { H1, H2, H3, H4, H5, H6 } from "../components/textComponents";
 import Commento from "../components/commento";
-
-const renderAst = new RehypeReact({
-  createElement: React.createElement,
-  components: {
-    h1: H2,
-    h2: H3,
-    h3: H4,
-    h4: H5,
-    h5: H6,
-    h6: H6
-  }
-}).Compiler;
+import { MDXRenderer } from "gatsby-plugin-mdx";
 
 export default function Post({ data, location }) {
   const url = location.href ? location.href : "";
-  const post = data.markdownRemark;
+  const post = data.mdx;
   const contextRef = React.useRef();
   return (
     <Layout share>
@@ -41,12 +28,12 @@ export default function Post({ data, location }) {
           <Ref innerRef={contextRef}>
             <Visibility>
               <Segment attached>
-                <H1>
+                <Header as="h1">
                   {post.frontmatter.title}
                   <Header.Subheader>
                     {post.frontmatter.description}
                   </Header.Subheader>
-                </H1>
+                </Header>
 
                 <Label size="large">
                   <Icon name="calendar" />
@@ -57,9 +44,9 @@ export default function Post({ data, location }) {
                 <Img fluid={post.frontmatter.thumbnail.childImageSharp.fluid} />
               </Segment>
 
-              <div>{renderAst(post.htmlAst)}</div>
+              <MDXRenderer>{post.body}</MDXRenderer>
               <Segment style={{ marginTop: "2em" }}>
-                <H3>Join the discussion</H3>
+                <Header as="h3">Join the discussion</Header>
                 <div style={{ marginTop: "2em" }}>
                   <Commento id={url} />
                 </div>
@@ -116,8 +103,8 @@ export default function Post({ data, location }) {
 
 export const PostQuery = graphql`
   query PostQuery($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      htmlAst
+    mdx(fields: { slug: { eq: $slug } }) {
+      body
       fileAbsolutePath
       fields {
         slug
