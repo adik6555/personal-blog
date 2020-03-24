@@ -1,21 +1,13 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
 import {
-  Card,
   Icon,
-  Image,
   Menu,
-  Grid,
-  Container,
   Responsive,
-  Sidebar,
-  SidebarPusher,
-  Button,
   Input,
-  Divider,
   Dimmer,
-  List,
-  Header
+  Header,
+  Transition
 } from "semantic-ui-react";
 import NoSSR from "react-no-ssr";
 import { Link } from "gatsby";
@@ -62,29 +54,35 @@ class MobileNavigation extends React.Component {
   handleOpen = () => this.setState({ active: true });
   handleClose = () => this.setState({ active: false });
   render() {
-    const activeItem = this.props.active;
     const { active } = this.state;
     return (
       <Responsive maxWidth={Responsive.onlyTablet.minWidth - 1}>
-        <Dimmer page active={active} style={{ padding: "0", margin: "0" }}>
-          <Icon onClick={this.handleClose} name="close"></Icon>
-
-          <Link to="/">
-            <Header style={{ marginTop: "33%" }} inverted as="h2">
-              Home
-            </Header>
-          </Link>
-          <Link to="/page-2">
-            <Header style={{ marginTop: "33%" }} inverted as="h2">
-              Other
-            </Header>
-          </Link>
-          <Link to="/">
-            <Header style={{ marginTop: "33%" }} inverted as="h2">
-              About me
-            </Header>
-          </Link>
-        </Dimmer>
+        <Transition.Group duration={500} animation="fade right">
+          {active && (
+            <Dimmer
+              page
+              onClickOutside={this.handleClose}
+              active={active}
+              style={{ padding: "0", margin: "0" }}
+            >
+              <Link to="/">
+                <Header style={{ marginTop: "33%" }} inverted as="h2">
+                  Home
+                </Header>
+              </Link>
+              <Link to="/page-2">
+                <Header style={{ marginTop: "33%" }} inverted as="h2">
+                  Other
+                </Header>
+              </Link>
+              <Link to="/">
+                <Header style={{ marginTop: "33%" }} inverted as="h2">
+                  About me
+                </Header>
+              </Link>
+            </Dimmer>
+          )}
+        </Transition.Group>
 
         <Menu secondary>
           <Menu.Item onClick={this.handleOpen}>
