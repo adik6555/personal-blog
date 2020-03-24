@@ -62,6 +62,7 @@ class MobileNavigation extends React.Component {
   handleOpen = () => this.setState({ active: true });
   handleClose = () => this.setState({ active: false });
   render() {
+    const url = window.location.href ? window.location.href : "";
     const { active } = this.state;
     return (
       <Responsive maxWidth={Responsive.onlyTablet.minWidth - 1}>
@@ -110,7 +111,7 @@ class MobileNavigation extends React.Component {
           )}
           {this.props.share && (
             <Menu.Item position="right">
-              <MobileShareMenu />
+              <MobileShareMenu url={url} />
             </Menu.Item>
           )}
         </Menu>

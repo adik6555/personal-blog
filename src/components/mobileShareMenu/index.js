@@ -70,19 +70,6 @@ export default function MobileShareMenu(props) {
               />
             </Menu.Item>
             <Menu.Item>
-              <FacebookShareButton
-                url={url}
-                style={{ paddingBottom: "7px", width: "100%" }}
-              >
-                <Icon
-                  size="large"
-                  circular
-                  style={{ margin: "0", background: "white" }}
-                  name="facebook"
-                />
-              </FacebookShareButton>
-            </Menu.Item>
-            <Menu.Item>
               <LinkedinShareButton
                 url={url}
                 style={{ paddingBottom: "7px", width: "100%" }}

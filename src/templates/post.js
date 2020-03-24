@@ -10,21 +10,13 @@ import {
   Label,
   Ref,
   Sticky,
-  Responsive,
-  Visibility,
-  Button
+  Visibility
 } from "semantic-ui-react";
 import Img from "gatsby-image";
-import {
-  FacebookShareButton,
-  LinkedinShareButton,
-  TwitterShareButton,
-  FacebookMessengerShareButton
-} from "react-share";
+import { LinkedinShareButton, TwitterShareButton } from "react-share";
 import RehypeReact from "rehype-react";
 import { H1, H2, H3, H4, H5, H6 } from "../components/textComponents";
 import Commento from "../components/commento";
-import MobileShareMenu from "../components/mobileShareMenu";
 
 const renderAst = new RehypeReact({
   createElement: React.createElement,
@@ -105,14 +97,7 @@ export default function Post({ data, location }) {
                   name="copy"
                 />
               </Menu.Item>
-              <Menu.Item style={{ padding: "0" }}>
-                <FacebookShareButton
-                  url={url}
-                  style={{ padding: "13px", width: "100%" }}
-                >
-                  <Icon size="large" style={{ margin: "0" }} name="facebook" />
-                </FacebookShareButton>
-              </Menu.Item>
+              <Menu.Item style={{ padding: "0" }}></Menu.Item>
               <Menu.Item style={{ padding: "0" }}>
                 <LinkedinShareButton
                   url={url}
