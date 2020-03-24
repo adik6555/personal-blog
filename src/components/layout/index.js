@@ -12,49 +12,46 @@ import {
   SidebarPusher,
   Button,
   Input,
-  Divider
+  Divider,
+  Dimmer,
+  List,
+  Header
 } from "semantic-ui-react";
 import NoSSR from "react-no-ssr";
+import { Link } from "gatsby";
 
 class DesktopNavigation extends React.Component {
   render() {
     const activeItem = this.props.active;
     return (
-      <NoSSR>
-        <Responsive minWidth={Responsive.onlyTablet.minWidth + 1}>
-          <Menu pointing secondary>
-            <Menu.Item header>Adam Petro </Menu.Item>
+      <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+        <Menu pointing secondary>
+          <Menu.Item header>Adam Petro </Menu.Item>
 
-            <Menu.Item active={activeItem === "home"} href="/" link name="home">
-              Home
-            </Menu.Item>
+          <Menu.Item active={activeItem === "home"} href="/" link name="home">
+            Home
+          </Menu.Item>
 
-            <Menu.Item
-              active={activeItem === "other"}
-              href="/"
-              link
-              name="other"
-            >
-              Other
-            </Menu.Item>
+          <Menu.Item active={activeItem === "other"} href="/" link name="other">
+            Other
+          </Menu.Item>
 
-            <Menu.Item
-              active={activeItem === "about me"}
-              href="/"
-              link
-              name="about me"
-            >
-              About me
+          <Menu.Item
+            active={activeItem === "about me"}
+            href="/"
+            link
+            name="about me"
+          >
+            About me
+          </Menu.Item>
+          {this.props.search && (
+            <Menu.Item position="right">
+              <Input icon="search" placeholder="search" />
             </Menu.Item>
-            {this.props.search && (
-              <Menu.Item position="right">
-                <Input icon="search" placeholder="search" />
-              </Menu.Item>
-            )}
-          </Menu>
-          {this.props.children}
-        </Responsive>
-      </NoSSR>
+          )}
+        </Menu>
+        {this.props.children}
+      </Responsive>
     );
   }
 }
@@ -62,67 +59,45 @@ class DesktopNavigation extends React.Component {
 class MobileNavigation extends React.Component {
   state = {};
 
-  handleSidebarHide = () => this.setState({ sidebarOpened: false });
-
-  handleToggle = () => this.setState({ sidebarOpened: true });
-
+  handleOpen = () => this.setState({ active: true });
+  handleClose = () => this.setState({ active: false });
   render() {
-    const { sidebarOpened } = this.state;
     const activeItem = this.props.active;
+    const { active } = this.state;
     return (
-      <Responsive maxWidth={Responsive.onlyTablet.minWidth}>
-        <Sidebar
-          animation="overlay"
-          onHide={this.handleSidebarHide}
-          visible={sidebarOpened}
-          vertical
-          pushable
-          as={Menu}
-        >
-          <Menu.Item header> Adam Petro </Menu.Item>
+      <Responsive maxWidth={Responsive.onlyTablet.minWidth - 1}>
+        <Dimmer page active={active} style={{ padding: "0", margin: "0" }}>
+          <Icon onClick={this.handleClose} name="close"></Icon>
 
-          <Menu.Item
-            href="/page-2/"
-            link
-            name="home"
-            active={activeItem === "home"}
-          >
-            Home
-          </Menu.Item>
+          <Link to="/">
+            <Header style={{ marginTop: "33%" }} inverted as="h2">
+              Home
+            </Header>
+          </Link>
+          <Link to="/page-2">
+            <Header style={{ marginTop: "33%" }} inverted as="h2">
+              Other
+            </Header>
+          </Link>
+          <Link to="/">
+            <Header style={{ marginTop: "33%" }} inverted as="h2">
+              About me
+            </Header>
+          </Link>
+        </Dimmer>
 
-          <Menu.Item
-            href="/page-2/"
-            link
-            name="other"
-            active={activeItem === "other"}
-          >
-            Other
-          </Menu.Item>
-
-          <Menu.Item
-            href="/page-2/"
-            link
-            name="about me"
-            active={activeItem === "about me"}
-          >
-            About me
+        <Menu secondary>
+          <Menu.Item onClick={this.handleOpen}>
+            <Icon name="bars"></Icon>
           </Menu.Item>
           {this.props.search && (
-            <Menu.Item position="bottom">
+            <Menu.Item position="right">
               <Input icon="search" placeholder="search" />
             </Menu.Item>
           )}
-        </Sidebar>
+        </Menu>
 
-        <SidebarPusher dimmed={sidebarOpened}>
-          <Menu secondary>
-            <Menu.Item onClick={this.handleToggle}>
-              <Icon name="bars"></Icon>
-            </Menu.Item>
-          </Menu>
-
-          {this.props.children}
-        </SidebarPusher>
+        {this.props.children}
       </Responsive>
     );
   }
@@ -131,14 +106,16 @@ class MobileNavigation extends React.Component {
 class Layout extends React.Component {
   render() {
     return (
-      <div style={{ maxWidth: "100%" }}>
-        <MobileNavigation {...this.props}>
-          {this.props.children}
-        </MobileNavigation>
-        <DesktopNavigation {...this.props}>
-          {this.props.children}
-        </DesktopNavigation>
-      </div>
+      <NoSSR>
+        <div style={{ maxWidth: "100%" }}>
+          <MobileNavigation {...this.props}>
+            {this.props.children}
+          </MobileNavigation>
+          <DesktopNavigation {...this.props}>
+            {this.props.children}
+          </DesktopNavigation>
+        </div>
+      </NoSSR>
     );
   }
 }
