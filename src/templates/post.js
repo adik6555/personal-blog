@@ -43,12 +43,7 @@ export default function Post({ data, location }) {
   const post = data.markdownRemark;
   const contextRef = React.useRef();
   return (
-    <Layout>
-      <div style={{ position: "fixed", top: "1%", right: "2%", zIndex: "10" }}>
-        <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
-          <MobileShareMenu url={url} />
-        </Responsive>
-      </div>
+    <Layout share>
       <Grid textAlign="justified" style={{ justifyContent: "center" }}>
         <Grid.Column widescreen={6} computer={8} tablet={12} mobile={15}>
           <Ref innerRef={contextRef}>
@@ -82,7 +77,7 @@ export default function Post({ data, location }) {
         </Grid.Column>
 
         <Grid.Column width={1} only="computer tablet">
-          <Sticky offset={30} context={contextRef}>
+          <Sticky offset={50} context={contextRef}>
             <Menu vertical style={{ width: "51px" }}>
               <Menu.Item style={{ padding: "0" }}>
                 <TwitterShareButton
