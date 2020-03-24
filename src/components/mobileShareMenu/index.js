@@ -39,6 +39,7 @@ export default function MobileShareMenu(props) {
               >
                 <Icon
                   circular
+                  size="large"
                   style={{ margin: "0", background: "white" }}
                   name="twitter"
                 />
@@ -56,6 +57,7 @@ export default function MobileShareMenu(props) {
               }}
             >
               <Icon
+                size="large"
                 color="black"
                 style={{
                   padding: "13px",
@@ -73,6 +75,7 @@ export default function MobileShareMenu(props) {
                 style={{ paddingBottom: "7px", width: "100%" }}
               >
                 <Icon
+                  size="large"
                   circular
                   style={{ margin: "0", background: "white" }}
                   name="facebook"
@@ -85,6 +88,7 @@ export default function MobileShareMenu(props) {
                 style={{ paddingBottom: "7px", width: "100%" }}
               >
                 <Icon
+                  size="large"
                   circular
                   style={{ margin: "0", background: "white" }}
                   name="linkedin"
