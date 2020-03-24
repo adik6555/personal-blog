@@ -86,7 +86,7 @@ class MobileNavigation extends React.Component {
 
         <Menu secondary>
           <Menu.Item onClick={this.handleOpen}>
-            <Icon name="bars"></Icon>
+            <Icon size="large" name="bars"></Icon>
           </Menu.Item>
           {this.props.search && (
             <Menu.Item position="right">

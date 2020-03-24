@@ -21,6 +21,7 @@ export default function MobileShareMenu(props) {
       <Icon
         style={{ margin: "0", background: "white" }}
         circular
+        size="large"
         name={visibility ? "close" : "share alternate"}
       ></Icon>
       <Transition.Group

@@ -44,7 +44,7 @@ export default function Post({ data, location }) {
   const contextRef = React.useRef();
   return (
     <Layout>
-      <div style={{ position: "fixed", top: "2%", right: "3%", zIndex: "10" }}>
+      <div style={{ position: "fixed", top: "1%", right: "2%", zIndex: "10" }}>
         <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
           <MobileShareMenu url={url} />
         </Responsive>
