@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/layout";
 import { graphql } from "gatsby";
 import {
@@ -10,7 +10,9 @@ import {
   Label,
   Ref,
   Sticky,
-  Responsive
+  Responsive,
+  Visibility,
+  Button
 } from "semantic-ui-react";
 import Img from "gatsby-image";
 import {
@@ -22,6 +24,7 @@ import {
 import RehypeReact from "rehype-react";
 import { H1, H2, H3, H4, H5, H6 } from "../components/textComponents";
 import Commento from "../components/commento";
+import MobileShareMenu from "../components/mobileShareMenu";
 
 const renderAst = new RehypeReact({
   createElement: React.createElement,
@@ -41,10 +44,15 @@ export default function Post({ data, location }) {
   const contextRef = React.useRef();
   return (
     <Layout>
+      <div style={{ position: "fixed", top: "2%", right: "3%", zIndex: "10" }}>
+        <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
+          <MobileShareMenu url={url} />
+        </Responsive>
+      </div>
       <Grid textAlign="justified" style={{ justifyContent: "center" }}>
         <Grid.Column widescreen={6} computer={8} tablet={12} mobile={15}>
           <Ref innerRef={contextRef}>
-            <div>
+            <Visibility>
               <Segment attached>
                 <H1>
                   {post.frontmatter.title}
@@ -52,6 +60,7 @@ export default function Post({ data, location }) {
                     {post.frontmatter.description}
                   </Header.Subheader>
                 </H1>
+
                 <Label size="large">
                   <Icon name="calendar" />
                   {post.frontmatter.date}
@@ -68,7 +77,7 @@ export default function Post({ data, location }) {
                   <Commento id={url} />
                 </div>
               </Segment>
-            </div>
+            </Visibility>
           </Ref>
         </Grid.Column>
 
@@ -83,17 +92,23 @@ export default function Post({ data, location }) {
                   <Icon size="large" style={{ margin: "0" }} name="twitter" />
                 </TwitterShareButton>
               </Menu.Item>
-              <Menu.Item style={{ padding: "0" }}>
-                <FacebookMessengerShareButton
-                  url={url}
-                  style={{ padding: "13px", width: "100%" }}
-                >
-                  <Icon
-                    size="large"
-                    style={{ margin: "0" }}
-                    name="facebook messenger"
-                  />
-                </FacebookMessengerShareButton>
+              <Menu.Item
+                onClick={() => {
+                  var dummy = document.createElement("input"),
+                    text = window.location.href;
+                  document.body.appendChild(dummy);
+                  dummy.value = text;
+                  dummy.select();
+                  document.execCommand("copy");
+                  document.body.removeChild(dummy);
+                }}
+                style={{ width: "49px", height: "47px", padding: "0" }}
+              >
+                <Icon
+                  size="large"
+                  style={{ padding: "13px", width: "100%", margin: "0" }}
+                  name="copy"
+                />
               </Menu.Item>
               <Menu.Item style={{ padding: "0" }}>
                 <FacebookShareButton
