@@ -13,6 +13,8 @@ import {
 import NoSSR from "react-no-ssr";
 import { Link } from "gatsby";
 import MobileShareMenu from "../mobileShareMenu";
+import { MDXProvider } from "@mdx-js/react";
+import * as TextComponents from "./../mdxComponents/TextComponents";
 
 class DesktopNavigation extends React.Component {
   render() {
@@ -125,14 +127,39 @@ class Layout extends React.Component {
   render() {
     return (
       <NoSSR>
-        <div style={{ maxWidth: "100%" }}>
-          <MobileNavigation {...this.props}>
-            {this.props.children}
-          </MobileNavigation>
-          <DesktopNavigation {...this.props}>
-            {this.props.children}
-          </DesktopNavigation>
-        </div>
+        <MDXProvider
+          components={{
+            h1: props => <TextComponents.Header1 {...props} />,
+            h2: props => (
+              <Header as="h3" {...props} style={{ textAlign: "initial" }} />
+            ),
+            h3: props => (
+              <Header as="h4" {...props} style={{ textAlign: "initial" }} />
+            ),
+            h4: props => (
+              <Header as="h5" {...props} style={{ textAlign: "initial" }} />
+            ),
+            h5: props => (
+              <Header as="h6" {...props} style={{ textAlign: "initial" }} />
+            ),
+            h6: props => (
+              <Header as="h6" {...props} style={{ textAlign: "initial" }} />
+            ),
+            p: props => <p {...props} style={{ color: "red" }} />,
+            pre: props => (
+              <div style={{ background: "grey" }}>{props.children} </div>
+            )
+          }}
+        >
+          <div style={{ maxWidth: "100%" }}>
+            <MobileNavigation {...this.props}>
+              {this.props.children}
+            </MobileNavigation>
+            <DesktopNavigation {...this.props}>
+              {this.props.children}
+            </DesktopNavigation>
+          </div>
+        </MDXProvider>
       </NoSSR>
     );
   }
