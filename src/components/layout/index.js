@@ -52,7 +52,7 @@ class DesktopNavigation extends React.Component {
             </Menu.Item>
           )}
         </Menu>
-        <div style={{ marginTop: "65px" }}>{this.props.children}</div>
+        <div style={{ paddingTop: "65px" }}>{this.props.children}</div>
       </Responsive>
     );
   }
