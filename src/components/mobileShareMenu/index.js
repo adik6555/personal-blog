@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { Menu, Icon, Transition, List } from "semantic-ui-react";
-import {
-  FacebookShareButton,
-  LinkedinShareButton,
-  TwitterShareButton,
-  FacebookMessengerShareButton
-} from "react-share";
+import { LinkedinShareButton, TwitterShareButton } from "react-share";
 
 export default function MobileShareMenu(props) {
   const url = props.url;

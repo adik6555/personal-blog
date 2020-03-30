@@ -7,8 +7,7 @@ import {
   Input,
   Dimmer,
   Header,
-  Transition,
-  Grid
+  Transition
 } from "semantic-ui-react";
 import NoSSR from "react-no-ssr";
 import { Link } from "gatsby";
@@ -20,7 +19,6 @@ import CodeBlock from "../mdxComponents/CodeBlock";
 class DesktopNavigation extends React.Component {
   render() {
     const activeItem = this.props.active;
-    console.log(this.props);
     return (
       <Responsive minWidth={Responsive.onlyTablet.minWidth}>
         <Menu
@@ -130,34 +128,29 @@ class Layout extends React.Component {
       <NoSSR>
         <MDXProvider
           components={{
-            h1: props => <TextComponents.Header1 {...props} />,
-            h2: props => (
-              <Header as="h3" {...props} style={{ textAlign: "initial" }} />
-            ),
-            h3: props => (
-              <Header as="h4" {...props} style={{ textAlign: "initial" }} />
-            ),
-            h4: props => (
-              <Header as="h5" {...props} style={{ textAlign: "initial" }} />
-            ),
-            h5: props => (
-              <Header as="h6" {...props} style={{ textAlign: "initial" }} />
-            ),
-            h6: props => (
-              <Header as="h6" {...props} style={{ textAlign: "initial" }} />
-            ),
-            p: props => <p {...props} style={{ color: "red" }} />,
-            pre: CodeBlock
+            h1: TextComponents.Header2,
+            h2: TextComponents.Header3,
+            h3: TextComponents.Header4,
+            h4: TextComponents.Header5,
+            h5: TextComponents.Header6,
+            h6: TextComponents.Header6,
+            p: TextComponents.Paragraph,
+            pre: CodeBlock,
+            ul: TextComponents.UnorderedList,
+            ol: TextComponents.OrderedList,
+            table: TextComponents.CustomTable,
+            td: TextComponents.TableCell,
+            tr: TextComponents.TableRow
           }}
         >
-          <div style={{ maxWidth: "100%" }}>
+          <>
             <MobileNavigation {...this.props}>
               {this.props.children}
             </MobileNavigation>
             <DesktopNavigation {...this.props}>
               {this.props.children}
             </DesktopNavigation>
-          </div>
+          </>
         </MDXProvider>
       </NoSSR>
     );

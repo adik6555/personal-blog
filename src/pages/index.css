@@ -1,6 +1,8 @@
 /* This css fixes some issues with semantic ui.
 These issues are mostly related to bad responsivity
 due to some weird margins in semantic ui components */
+@import url("https://fonts.googleapis.com/css?family=Bitter&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap");
 
 .ui.grid {
   margin-left: 0;

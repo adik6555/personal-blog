@@ -16,6 +16,7 @@ import Img from "gatsby-image";
 import { LinkedinShareButton, TwitterShareButton } from "react-share";
 import Commento from "../components/commento";
 import { MDXRenderer } from "gatsby-plugin-mdx";
+import { Header1 } from "./../components/mdxComponents/TextComponents";
 
 export default function Post({ data, location }) {
   const url = location.href ? location.href : "";
@@ -28,7 +29,7 @@ export default function Post({ data, location }) {
           <Ref innerRef={contextRef}>
             <Visibility>
               <Segment attached>
-                <Header as="h1">
+                <Header as="h1" style={{ fontSize: "220%" }}>
                   {post.frontmatter.title}
                   <Header.Subheader>
                     {post.frontmatter.description}

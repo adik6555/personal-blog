@@ -1,8 +1,7 @@
-import React, { useEffect, Children } from "react";
+import React from "react";
 import Highlight, { defaultProps } from "prism-react-renderer";
-import Prism from "prismjs";
 import darkTheme from "prism-react-renderer/themes/github";
-import { Button, Label } from "semantic-ui-react";
+import { Button, Label, Segment, Icon } from "semantic-ui-react";
 
 export default ({ children, className }) => {
   const code = [];
@@ -20,10 +19,11 @@ export default ({ children, className }) => {
   const toggleNumbered = () => {
     setNumbered(!numbered);
   };
-  console.log(language);
 
   return (
-    <>
+    <div
+      style={{ margin: "40px 0", boxShadow: "0px 0px 9px 3px rgb(0,0,0,0.2)" }}
+    >
       <Highlight
         {...defaultProps}
         theme={darkTheme}
@@ -32,28 +32,22 @@ export default ({ children, className }) => {
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <>
-            <pre
-              className={className}
-              style={{ ...style, padding: "10px 20px 0px 20px" }}
-            >
-              <div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginBottom: "20px"
-                  }}
-                >
-                  <Button
-                    color={numbered ? "grey" : ""}
-                    onClick={toggleNumbered}
-                  >
-                    {numbered ? "Hide" : "Show"} line numbers
-                  </Button>
-                  <Label color="grey" style={{ maxHeight: "25px" }}>
-                    {language}
-                  </Label>
-                </div>
+            <Segment style={{ padding: "0" }}>
+              <Label attached="top left" color="grey">
+                {language}
+              </Label>
+              <Label
+                as="a"
+                color={numbered ? "grey" : ""}
+                onClick={toggleNumbered}
+                attached="top right"
+              >
+                {numbered ? "Hide" : "Show"} line numbers
+              </Label>
+              <pre
+                className={className}
+                style={{ ...style, padding: "50px 20px 20px 20px", margin: 0 }}
+              >
                 <div style={{ overflow: "auto" }}>
                   {tokens.map((line, i) => (
                     <>
@@ -80,11 +74,11 @@ export default ({ children, className }) => {
                     </>
                   ))}
                 </div>
-              </div>
-            </pre>
+              </pre>
+            </Segment>
           </>
         )}
       </Highlight>
-    </>
+    </div>
   );
 };
