@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Adam Petro Personal Blog`,
-    description: ``,
+    title: `Adam Petro Blog`,
+    description: `Personal blog of Adam Petro.`,
     author: `@adik6555`
   },
   plugins: [
@@ -36,7 +36,8 @@ module.exports = {
           },
           {
             resolve: `gatsby-remark-copy-linked-files`
-          }
+          },
+          `gatsby-remark-prismjs`
         ],
         plugins: [`gatsby-remark-component`]
       }
@@ -46,11 +47,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Adam Petro Blog`,
+        short_name: `blog`,
+        description: "Personal blog of Adam Petro.",
+        lang: "en",
         start_url: `/`,
         background_color: `#663399`,
-        theme_color: `#663399`,
+        theme_color_in_head: false,
         display: `minimal-ui` // This path is relative to the root of the site.
       }
     }

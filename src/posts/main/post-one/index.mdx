@@ -5,13 +5,83 @@ date: 18.3.2020
 thumbnail: "./thumbnail.jpg"
 ---
 
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+But what if the text didnt start with a heading.
+
+- First item
+- Second item
+- Third item
+- Fourth item
+- Fifth item
+
+1. Oh boy, this
+2. Is ordered
+3. List in it's best
+4. Form.
+5. this is
+6. what peak performance
+7. looks like
+
+| Tables   |      Are      |   Cool |   Cool |   Cool |
+| :------- | :-----------: | -----: | -----: | -----: |
+| col 1 is | left-aligned  | \$1600 | \$1600 | \$1600 |
+| col 2 is |   centered    |   \$12 |   \$12 |   \$12 |
+| col 3 is | right-aligned |    \$1 |    \$1 |    \$1 |
+
+`a code sample`
+
 # This is markdown heading
 
+```javascript
+var rows = prompt("How many rows for your multiplication table?");
+var cols = prompt("How many columns for your multiplication table?");
+if (rows == "" || rows == null) rows = 10;
+if (cols == "" || cols == null) cols = 10;
+createTable(rows, cols);
+function createTable(rows, cols) {
+  var j = 1;
+  var output = "<table border='1' width='500' cellspacing='0'cellpadding='5'>";
+  for (i = 1; i <= rows; i++) {
+    output = output + "<tr>";
+    while (j <= cols) {
+      output = output + "<td>" + i * j + "</td>";
+      j = j + 1;
+    }
+    output = output + "</tr>";
+    j = 1;
+  }
+  output = output + "</table>";
+  document.write(output);
+}
 ```
 
-Codeblock
+this is **very** bold and also a bit _curved_, sometimes maybe **_both_**. If you don't like it, just ~~strikethrough~~ it
 
-```
+there should be a thematic break
+
+---
+
+right here
+
+[MDX](https://mdxjs.com)
 
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
