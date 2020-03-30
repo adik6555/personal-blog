@@ -15,6 +15,7 @@ import { Link } from "gatsby";
 import MobileShareMenu from "../mobileShareMenu";
 import { MDXProvider } from "@mdx-js/react";
 import * as TextComponents from "./../mdxComponents/TextComponents";
+import CodeBlock from "../mdxComponents/CodeBlock";
 
 class DesktopNavigation extends React.Component {
   render() {
@@ -146,9 +147,7 @@ class Layout extends React.Component {
               <Header as="h6" {...props} style={{ textAlign: "initial" }} />
             ),
             p: props => <p {...props} style={{ color: "red" }} />,
-            pre: props => (
-              <div style={{ background: "grey" }}>{props.children} </div>
-            )
+            pre: CodeBlock
           }}
         >
           <div style={{ maxWidth: "100%" }}>
