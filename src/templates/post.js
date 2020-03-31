@@ -16,7 +16,6 @@ import Img from "gatsby-image";
 import { LinkedinShareButton, TwitterShareButton } from "react-share";
 import Commento from "../components/commento";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import { Header1 } from "./../components/mdxComponents/TextComponents";
 
 export default function Post({ data, location }) {
   const url = location.href ? location.href : "";
@@ -30,19 +29,21 @@ export default function Post({ data, location }) {
             <Visibility>
               <Segment attached>
                 <Header as="h1" style={{ fontSize: "220%" }}>
-                  {post.frontmatter.title}
+                  {post.exports.metadata.title}
                   <Header.Subheader>
-                    {post.frontmatter.description}
+                    {post.exports.metadata.description}
                   </Header.Subheader>
                 </Header>
 
                 <Label size="large">
                   <Icon name="calendar" />
-                  {post.frontmatter.date}
+                  {post.exports.metadata.date}
                 </Label>
               </Segment>
               <Segment attached style={{ marginBottom: "3em" }}>
-                <Img fluid={post.frontmatter.thumbnail.childImageSharp.fluid} />
+                <Img
+                  fluid={post.exports.metadata.thumbnail.childImageSharp.fluid}
+                />
               </Segment>
 
               <MDXRenderer>{post.body}</MDXRenderer>
@@ -110,14 +111,16 @@ export const PostQuery = graphql`
       fields {
         slug
       }
-      frontmatter {
-        title
-        description
-        date
-        thumbnail {
-          childImageSharp {
-            fluid(maxWidth: 800) {
-              ...GatsbyImageSharpFluid
+      exports {
+        metadata {
+          date
+          description
+          title
+          thumbnail {
+            childImageSharp {
+              fluid(maxWidth: 800) {
+                ...GatsbyImageSharpFluid
+              }
             }
           }
         }

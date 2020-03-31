@@ -13,7 +13,7 @@ import NoSSR from "react-no-ssr";
 import { Link } from "gatsby";
 import MobileShareMenu from "../mobileShareMenu";
 import { MDXProvider } from "@mdx-js/react";
-import * as TextComponents from "./../mdxComponents/TextComponents";
+import * as CustomComponents from "./../mdxComponents/CustomComponents";
 import CodeBlock from "../mdxComponents/CodeBlock";
 
 class DesktopNavigation extends React.Component {
@@ -128,19 +128,20 @@ class Layout extends React.Component {
       <NoSSR>
         <MDXProvider
           components={{
-            h1: TextComponents.Header2,
-            h2: TextComponents.Header3,
-            h3: TextComponents.Header4,
-            h4: TextComponents.Header5,
-            h5: TextComponents.Header6,
-            h6: TextComponents.Header6,
-            p: TextComponents.Paragraph,
+            h1: CustomComponents.Header2,
+            h2: CustomComponents.Header3,
+            h3: CustomComponents.Header4,
+            h4: CustomComponents.Header5,
+            h5: CustomComponents.Header6,
+            h6: CustomComponents.Header6,
+            p: CustomComponents.Paragraph,
             pre: CodeBlock,
-            ul: TextComponents.UnorderedList,
-            ol: TextComponents.OrderedList,
-            table: TextComponents.CustomTable,
-            td: TextComponents.TableCell,
-            tr: TextComponents.TableRow
+            ul: CustomComponents.UnorderedList,
+            ol: CustomComponents.OrderedList,
+            table: CustomComponents.CustomTable,
+            td: CustomComponents.TableCell,
+            tr: CustomComponents.TableRow,
+            code: CustomComponents.Code
           }}
         >
           <>

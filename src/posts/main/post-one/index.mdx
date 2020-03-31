@@ -1,9 +1,9 @@
----
-title: Title of a second post
-description: ""
-date: 18.3.2020
-thumbnail: "./thumbnail.jpg"
----
+export const metadata = {
+  title: "Title of a second post",
+  description: "",
+  thumbnail: "./thumbnail.jpg",
+  date: "18.3.2020"
+};
 
 But what if the text didnt start with a heading.
 But what if the text didnt start with a heading.
@@ -81,9 +81,13 @@ there should be a thematic break
 
 right here
 
-[MDX](https://mdxjs.com)
+[MDX](https://mdxjs.com "bitconneeeeect")
+
+Oh boy, here comes ![This is alt of the image](./thumbnail.jpg)
 
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+I wonder how `inline code` renders
 
 ## This is subheading
 

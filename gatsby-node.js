@@ -4,7 +4,7 @@ const path = require("path");
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `Mdx`) {
-    const slug = node.frontmatter.title.split(" ").join("-");
+    const slug = node.exports.metadata.title.split(" ").join("-");
     slug.replace(/[^\w\s-]/g, "");
     createNodeField({
       node,
