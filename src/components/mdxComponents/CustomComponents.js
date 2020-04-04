@@ -123,7 +123,7 @@ export function Code(props) {
   return (
     <span
       style={{
-        background: "rgb(215,214,215)",
+        background: "#e8e8e8",
         borderRadius: "3px"
       }}
     >

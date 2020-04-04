@@ -30,7 +30,7 @@ export default function Post({ data, location }) {
               <Segment attached>
                 <Header as="h1" style={{ fontSize: "220%" }}>
                   {post.exports.metadata.title}
-                  <Header.Subheader>
+                  <Header.Subheader style={{ margin: "10px 0" }}>
                     {post.exports.metadata.description}
                   </Header.Subheader>
                 </Header>
@@ -39,6 +39,15 @@ export default function Post({ data, location }) {
                   <Icon name="calendar" />
                   {post.exports.metadata.date}
                 </Label>
+                {post.exports.metadata.tags && (
+                  <Label.Group style={{ marginTop: "15px" }}>
+                    {post.exports.metadata.tags.map(tag => (
+                      <Label style={{ fontStyle: "italic" }} basic>
+                        #{tag}
+                      </Label>
+                    ))}
+                  </Label.Group>
+                )}
               </Segment>
               <Segment attached style={{ marginBottom: "3em" }}>
                 <Img
@@ -116,6 +125,7 @@ export const PostQuery = graphql`
           date
           description
           title
+          tags
           thumbnail {
             childImageSharp {
               fluid(maxWidth: 800) {

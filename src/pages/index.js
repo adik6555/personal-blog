@@ -3,7 +3,7 @@ import "semantic-ui-css/semantic.min.css";
 import Layout from "../components/layout";
 import PostPreview from "../components/postpreview";
 import "./index.css";
-import { Grid } from "semantic-ui-react";
+import { Grid, Container, Header } from "semantic-ui-react";
 
 export default function IndexPage({ data }) {
   return (
@@ -13,7 +13,11 @@ export default function IndexPage({ data }) {
           <PostPreview
             title={node.exports.metadata.title}
             date={node.exports.metadata.date}
-            description={node.exports.metadata.description}
+            description={
+              node.exports.metadata.description
+                ? node.exports.metadata.description
+                : node.excerpt
+            }
             link={node.fields.slug}
             image={node.exports.metadata.thumbnail.childImageSharp.fluid}
           />
@@ -29,12 +33,14 @@ export const query = graphql`
       totalCount
       edges {
         node {
+          excerpt(pruneLength: 350)
           id
           exports {
             metadata {
               date
               description
               title
+              tags
               thumbnail {
                 childImageSharp {
                   fluid(maxWidth: 800) {
