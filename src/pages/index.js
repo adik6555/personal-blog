@@ -3,7 +3,7 @@ import "semantic-ui-css/semantic.min.css";
 import Layout from "../components/layout";
 import PostPreview from "../components/postpreview";
 import "./index.css";
-import { Grid } from "semantic-ui-react";
+import { Grid, Container, Header } from "semantic-ui-react";
 
 export default function IndexPage({ data }) {
   return (
@@ -11,11 +11,15 @@ export default function IndexPage({ data }) {
       <Grid centered>
         {data.allMdx.edges.map(({ node }) => (
           <PostPreview
-            title={node.frontmatter.title}
-            date={node.frontmatter.date}
-            description={node.frontmatter.description}
+            title={node.exports.metadata.title}
+            date={node.exports.metadata.date}
+            description={
+              node.exports.metadata.description
+                ? node.exports.metadata.description
+                : node.excerpt
+            }
             link={node.fields.slug}
-            image={node.frontmatter.thumbnail.childImageSharp.fluid}
+            image={node.exports.metadata.thumbnail.childImageSharp.fluid}
           />
         ))}
       </Grid>
@@ -25,19 +29,23 @@ export default function IndexPage({ data }) {
 
 export const query = graphql`
   query {
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(sort: { fields: [exports___metadata___date], order: DESC }) {
       totalCount
       edges {
         node {
+          excerpt(pruneLength: 350)
           id
-          frontmatter {
-            title
-            date
-            description
-            thumbnail {
-              childImageSharp {
-                fluid(maxWidth: 800) {
-                  ...GatsbyImageSharpFluid
+          exports {
+            metadata {
+              date
+              description
+              title
+              tags
+              thumbnail {
+                childImageSharp {
+                  fluid(maxWidth: 800) {
+                    ...GatsbyImageSharpFluid
+                  }
                 }
               }
             }

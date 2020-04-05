@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "semantic-ui-css/semantic.min.css";
 import { Card, Grid, Header, Responsive } from "semantic-ui-react";
 import Img from "gatsby-image";
@@ -22,7 +22,12 @@ export default function PostPreview(props) {
                   {props.title}
                 </Header>
                 <Card.Meta>{props.date}</Card.Meta>
-                <Card.Description>{props.description}</Card.Description>
+                {props.description && (
+                  <Card.Description>
+                    {props.description.substring(0, 350)}
+                    ...
+                  </Card.Description>
+                )}
               </Grid.Column>
             </Grid>
           </Responsive>
@@ -30,7 +35,12 @@ export default function PostPreview(props) {
             <Img fluid={props.image} />
             <Card.Header as="h4">{props.title}</Card.Header>
             <Card.Meta>{props.date}</Card.Meta>
-            <Card.Description>{props.description}</Card.Description>
+            {props.description && (
+              <Card.Description>
+                {props.description.substring(0, 300)}
+                ...
+              </Card.Description>
+            )}
           </Responsive>
         </Card.Content>
       </Card>

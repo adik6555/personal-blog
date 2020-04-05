@@ -1,6 +1,7 @@
 import React from "react";
 import { Header } from "semantic-ui-react";
 import { Table } from "semantic-ui-react";
+import Img from "gatsby-image";
 
 const HeaderStyles = {
   fontSize: "180%",
@@ -115,5 +116,20 @@ export function TableCell(props) {
     <Table.Cell textAlign={props.align} style={ParagraphStyles} {...props}>
       {props.children}
     </Table.Cell>
+  );
+}
+
+export function Code(props) {
+  return (
+    <span
+      style={{
+        background: "#e8e8e8",
+        borderRadius: "3px"
+      }}
+    >
+      <code style={{ margin: "0 5px" }} {...props}>
+        {props.children}
+      </code>
+    </span>
   );
 }
