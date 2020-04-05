@@ -17,6 +17,13 @@ import * as CustomComponents from "./../mdxComponents/CustomComponents";
 import CodeBlock from "../mdxComponents/CodeBlock";
 
 class DesktopNavigation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  sendSearchInput = event => {
+    this.props.searchInput(event);
+  };
   render() {
     const activeItem = this.props.active;
     return (
@@ -47,7 +54,12 @@ class DesktopNavigation extends React.Component {
           </Menu.Item>
           {this.props.search && (
             <Menu.Item position="right">
-              <Input icon="search" placeholder="search" />
+              <Input
+                value={this.state.search}
+                onChange={this.sendSearchInput}
+                icon="search"
+                placeholder="search"
+              />
             </Menu.Item>
           )}
         </Menu>
@@ -58,7 +70,13 @@ class DesktopNavigation extends React.Component {
 }
 
 class MobileNavigation extends React.Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  sendSearchInput = event => {
+    this.props.searchInput(event);
+  };
 
   handleOpen = () => this.setState({ active: true });
   handleClose = () => this.setState({ active: false });
@@ -107,7 +125,12 @@ class MobileNavigation extends React.Component {
           </Menu.Item>
           {this.props.search && (
             <Menu.Item position="right">
-              <Input icon="search" placeholder="search" />
+              <Input
+                value={this.state.search}
+                onChange={this.sendSearchInput}
+                icon="search"
+                placeholder="search"
+              />
             </Menu.Item>
           )}
           {this.props.share && (
