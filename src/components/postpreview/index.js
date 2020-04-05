@@ -24,8 +24,7 @@ export default function PostPreview(props) {
                 <Card.Meta>{props.date}</Card.Meta>
                 {props.description && (
                   <Card.Description>
-                    {props.description.substring(0, 350)}
-                    ...
+                    {props.description.substring(0, 350)}...
                   </Card.Description>
                 )}
               </Grid.Column>
@@ -37,8 +36,7 @@ export default function PostPreview(props) {
             <Card.Meta>{props.date}</Card.Meta>
             {props.description && (
               <Card.Description>
-                {props.description.substring(0, 300)}
-                ...
+                {props.description.substring(0, 300)}...
               </Card.Description>
             )}
           </Responsive>
