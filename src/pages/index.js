@@ -17,9 +17,11 @@ export default function IndexPage({ data }) {
 
     const filteredPosts = posts.filter(({ node }) => {
       const { description, tags, title } = node.exports.metadata;
+      const excerpt = node.excerpt;
       return (
-        (description &&
-          description.toLowerCase().includes(query.toLowerCase())) ||
+        (description
+          ? description.toLowerCase().includes(query.toLowerCase())
+          : excerpt.toLowerCase().includes(query.toLowerCase())) ||
         (title && title.toLowerCase().includes(query.toLowerCase())) ||
         (tags &&
           tags
