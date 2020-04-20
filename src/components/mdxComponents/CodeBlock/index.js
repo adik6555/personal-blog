@@ -1,7 +1,7 @@
 import React from "react";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import darkTheme from "prism-react-renderer/themes/github";
-import { Button, Label, Segment, Icon } from "semantic-ui-react";
+import { Label, Segment } from "semantic-ui-react";
 
 export default ({ children, className }) => {
   const code = [];

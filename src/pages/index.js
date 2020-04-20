@@ -1,20 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "semantic-ui-css/semantic.min.css";
 import Layout from "../components/layout";
 import PostPreview from "../components/postpreview";
 import "./index.css";
 import { Grid, Container, Header } from "semantic-ui-react";
 
-export default function IndexPage({ data }) {
+export default function IndexPage({ data, location }) {
   const posts = data.allMdx.edges;
   const [state, setState] = React.useState({
-    filteredPosts: [],
-    query: ""
+    query: location.search
+      ? location.search.substring(location.search.indexOf("=") + 1)
+      : "",
+    filteredPosts: filterPosts(
+      location.search
+        ? location.search.substring(location.search.indexOf("=") + 1)
+        : ""
+    )
   });
 
   function handleSearchChange(childEvent) {
     const query = childEvent.target.value;
-
+    const filteredPosts = filterPosts(query);
+    setState({
+      filteredPosts,
+      query
+    });
+  }
+  function filterPosts(query) {
     const filteredPosts = posts.filter(({ node }) => {
       const { description, tags, title } = node.exports.metadata;
       const excerpt = node.excerpt;
@@ -30,18 +42,20 @@ export default function IndexPage({ data }) {
             .includes(query.toLowerCase()))
       );
     });
-    setState({
-      filteredPosts,
-      query
-    });
+    return filteredPosts;
   }
-  const postsToMap = state.query.length === 0 ? posts : state.filteredPosts;
 
+  const postsToMap = state.query.length === 0 ? posts : state.filteredPosts;
   return (
-    <Layout active="home" search searchInput={handleSearchChange}>
+    <Layout
+      active="home"
+      search
+      searchInput={handleSearchChange}
+      searchValue={state.tempQuery || state.query}
+    >
       <Grid centered>
         {postsToMap.length !== 0 ? (
-          postsToMap.map(({ node }) => (
+          postsToMap.map(({ node }, i) => (
             <PostPreview
               title={node.exports.metadata.title}
               date={node.exports.metadata.date}
@@ -50,6 +64,7 @@ export default function IndexPage({ data }) {
                   ? node.exports.metadata.description
                   : node.excerpt
               }
+              key={i}
               link={node.fields.slug}
               image={node.exports.metadata.thumbnail.childImageSharp.fluid}
             />

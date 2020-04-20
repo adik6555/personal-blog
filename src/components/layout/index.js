@@ -25,6 +25,7 @@ class DesktopNavigation extends React.Component {
     this.props.searchInput(event);
   };
   render() {
+    console.log(this.props);
     const activeItem = this.props.active;
     return (
       <Responsive minWidth={Responsive.onlyTablet.minWidth}>
@@ -55,7 +56,7 @@ class DesktopNavigation extends React.Component {
           {this.props.search && (
             <Menu.Item position="right">
               <Input
-                value={this.state.search}
+                value={this.props.searchValue}
                 onChange={this.sendSearchInput}
                 icon="search"
                 placeholder="search"
@@ -126,7 +127,7 @@ class MobileNavigation extends React.Component {
           {this.props.search && (
             <Menu.Item position="right">
               <Input
-                value={this.state.search}
+                value={this.props.searchValue}
                 onChange={this.sendSearchInput}
                 icon="search"
                 placeholder="search"

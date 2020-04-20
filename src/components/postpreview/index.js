@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "semantic-ui-css/semantic.min.css";
 import { Card, Grid, Header, Responsive } from "semantic-ui-react";
 import Img from "gatsby-image";
-
-// props:[
-//   title, meta, description, img
-// ]
 
 export default function PostPreview(props) {
   return (
