@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/layout";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import {
   Grid,
   Segment,
@@ -43,7 +43,7 @@ export default function Post({ data, location }) {
                   <Label.Group style={{ marginTop: "15px" }}>
                     {post.exports.metadata.tags.map(tag => (
                       <Label style={{ fontStyle: "italic" }} basic>
-                        #{tag}
+                        <Link to={`?search=${tag}`}>#{tag}</Link>
                       </Label>
                     ))}
                   </Label.Group>

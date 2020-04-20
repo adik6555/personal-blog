@@ -1,7 +1,6 @@
 import React from "react";
 import { Header } from "semantic-ui-react";
 import { Table } from "semantic-ui-react";
-import Img from "gatsby-image";
 
 const HeaderStyles = {
   fontSize: "180%",
